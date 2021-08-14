@@ -1,5 +1,6 @@
 const http = require('http')
 const fs = require('fs')
+const database = require('./db_controller')
 
 const hostname = '127.0.0.1';
 const port = 3000
@@ -23,35 +24,50 @@ const server = http.createServer((req, res) => {
         res.setHeader('Content-Type', contentType)
         res.end(data)
     } else if (req.method === 'POST' && req.url === '/add-action') {
-        const actionArray = JSON.parse(fs.readFileSync('./database.json', 'utf8') || '[]')
-        let action = ''
+        let dataJSON = ''
         req.on('data', chunk => {
-            action += chunk
+            dataJSON += chunk
         })
 
         req.on('end', () => {
-            actionArray.push(action)
-            jsonArray = JSON.stringify(actionArray)
-            fs.writeFileSync('database.json', jsonArray)
-            res.end('Action successfully added!')
+            const {username, action} = JSON.parse(dataJSON)
+            database.createAction(username, action, (err, todo_id) => {
+                if (err) {
+                    res.statusCode = 400
+                    res.end('Username does not exist!')
+                } else {
+                    res.end(JSON.stringify({
+                        "message" : "Action successfully added!",
+                        "todo_id" : todo_id
+                    }))
+                }
+            })
         })
-    } else if (req.method === 'GET' && req.url === '/actions') {
-        const jsonArray = fs.readFileSync('./database.json') || '[]'
-        res.end(jsonArray)
+    } else if (req.method === 'GET' && req.url.startsWith('/actions/')) {
+        database.getAllTodos(req.url.slice(9), (err, actions) => {
+            if (err) {
+                res.statusCode = 500
+                res.end('Something went wrong!')
+            } else {
+                res.end(JSON.stringify(actions))
+            }
+        })
     } else if (req.method === 'DELETE' && req.url === '/delete-action') {
-        var actionArray = JSON.parse(fs.readFileSync('./database.json', 'utf8') || '[]')
-        let action = ''
+        let dataJSON = ''
         req.on('data', chunk => {
-            action += chunk
+            dataJSON += chunk
         })
 
         req.on('end', () => {
-            actionArray = actionArray.filter(function (item) {
-                return item !== action;
-            });
-            jsonArray = JSON.stringify(actionArray)
-            fs.writeFileSync('database.json', jsonArray)
-            res.end('Action successfully deleted!')
+            const {todo_id, username} = JSON.parse(dataJSON)
+            database.deleteAction(todo_id, username, (err) => {
+                if (err) {
+                    res.statusCode = 400
+                    res.end('Username does not exist!')
+                } else {
+                    res.end('Action successfully deleted!')
+                }
+            })
         })
     }
 })
