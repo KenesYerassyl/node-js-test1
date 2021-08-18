@@ -228,13 +228,7 @@ body {
 .list-wrapper ul li .form-check,
 .list-wrapper ul li .form-check .form-check-label,
 .email-wrapper .mail-sidebar .menu-bar .profile-list-item a .user .u-name,
-.email-wrapper
-    .mail-sidebar
-    .menu-bar
-    .profile-list-item
-    a
-    .user
-    .u-designation,
+.email-wrapper .mail-sidebar .menu-bar .profile-list-item a .user .u-designation,
 .email-wrapper .mail-list-container .mail-list .content .sender-name,
 .email-wrapper .message-body .attachments-sections ul li .details p.file-name,
 .settings-panel .chat-list .list .info p {
@@ -255,13 +249,7 @@ body {
 .list-wrapper ul li .form-check,
 .list-wrapper ul li .form-check .form-check-label,
 .email-wrapper .mail-sidebar .menu-bar .profile-list-item a .user .u-name,
-.email-wrapper
-    .mail-sidebar
-    .menu-bar
-    .profile-list-item
-    a
-    .user
-    .u-designation,
+.email-wrapper .mail-sidebar .menu-bar .profile-list-item a .user .u-designation,
 .email-wrapper .mail-list-container .mail-list .content .sender-name,
 .email-wrapper .message-body .attachments-sections ul li .details p.file-name,
 .settings-panel .chat-list .list .info p {
@@ -308,13 +296,7 @@ input[type="checkbox"] {
 .list-wrapper ul li .form-check,
 .list-wrapper ul li .form-check .form-check-label,
 .email-wrapper .mail-sidebar .menu-bar .profile-list-item a .user .u-name,
-.email-wrapper
-    .mail-sidebar
-    .menu-bar
-    .profile-list-item
-    a
-    .user
-    .u-designation,
+.email-wrapper .mail-sidebar .menu-bar .profile-list-item a .user .u-designation,
 .email-wrapper .mail-list-container .mail-list .content .sender-name,
 .email-wrapper .message-body .attachments-sections ul li .details p.file-name,
 .settings-panel .chat-list .list .info p {
@@ -377,10 +359,7 @@ input[type="checkbox"] {
     left: 0;
 }
 
-.form-check
-    .form-check-label
-    input[type="checkbox"]:checked
-    + .input-helper:before {
+.form-check .form-check-label input[type="checkbox"]:checked + .input-helper:before {
     background: #405189;
     border-width: 0;
 }
@@ -477,11 +456,6 @@ input[type="checkbox"] {
 .swal2-modal,
 .navbar .navbar-menu-wrapper .navbar-nav,
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-profile,
-.navbar
-    .navbar-menu-wrapper
-    .navbar-nav
-    .nav-item.dropdown
-    .navbar-dropdown
-    .dropdown-item {
+.navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .navbar-dropdown .dropdown-item {
     display: flex !important;
 }
