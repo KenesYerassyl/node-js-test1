@@ -19,12 +19,16 @@ async function process_data(event) {
         method: "POST",
     };
     const endpoint = logInLink ? "register" : "auth";
-    let response = await fetch(`http://127.0.0.1:3000/${endpoint}`, params);
-
-    if (response.status === 200) {
-        window.location.pathname = "/";
-    } else {
-        const message = (await response.json()).message;
-        errorLabel.textContent = message;
+    try {
+        let response = await fetch(`http://127.0.0.1:3000/${endpoint}`, params);
+        console.log(await response.json());
+        if (response.status === 200) {
+            window.location.pathname = "/";
+        } else {
+            const message = (await response.json()).message;
+            errorLabel.textContent = message;
+        }
+    } catch (error) {
+        console.log("Error: ", error);
     }
 }
